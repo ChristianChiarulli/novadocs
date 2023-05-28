@@ -1,7 +1,6 @@
 ---
 import { CollectionEntry, getCollection } from "astro:content";
-import MainLayout from "../layouts/MainLayout.astro";
-// import Pagination from "../components/Pagination.astro";
+import DocLayout from "../layouts/DocLayout.astro";
 
 export async function getStaticPaths() {
   const docs = await getCollection("docs", ({ id }) => {
@@ -52,7 +51,7 @@ const prev = getPreviousItemByKey(docs, "id", post.id);
 const next = getNextItemByKey(docs, "id", post.id);
 ---
 
-<MainLayout headings={headings} next={next} prev={prev} {...post.data}>
+<DocLayout headings={headings} next={next} prev={prev} {...post.data}>
   <Content />
   <!-- <Pagination next={next} prev={prev} /> -->
-</MainLayout>
+</DocLayout>
