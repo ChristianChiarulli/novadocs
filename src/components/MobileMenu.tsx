@@ -51,7 +51,7 @@ export default function MobileMenu() {
           aria-hidden="true"
         />
         <div className="fixed z-50 inset-0 lg:hidden">
-          <Dialog.Panel className="fixed top-4 right-4 w-full max-w-xs bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 text-base font-semibold">
+          <Dialog.Panel className="fixed top-4 right-4 w-56 max-w-xs bg-white dark:bg-zinc-800 rounded-lg shadow-lg p-6 text-base font-semibold">
             <button
               onClick={closePopup}
               className="absolute z-10 top-5 right-5 w-8 h-8 flex items-center justify-center text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
