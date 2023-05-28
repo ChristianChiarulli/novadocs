@@ -44,7 +44,7 @@ export default function ThemeToggle() {
 
   return (
     <>
-      <button className="hidden lg:block" onClick={openPopup}>
+      <button className="hidden lg:block outline-none" onClick={openPopup}>
         {theme === "light" ? (
           <SunIcon className="h-6 w-6 text-orange-500" aria-hidden="true" />
         ) : (
