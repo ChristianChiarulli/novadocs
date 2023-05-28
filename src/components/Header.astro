@@ -1,0 +1,215 @@
+---
+import { SITE } from "../settings";
+import Search from "./Search";
+import ThemeToggleButton from "./ThemeToggleButton.astro";
+import MobileSidebar from "./MobileSidebar";
+import MobileMenu from "./MobileMenu";
+import ThemeMenu from "./ThemeMenu";
+import Lightning from "./Lightning";
+import { getCollection } from "astro:content";
+import DocNavigation from "./DocNavigation.astro";
+import {
+  MagnifyingGlassIcon,
+  ChevronRightIcon,
+  RocketLaunchIcon,
+} from "@heroicons/react/24/solid";
+
+type Props = {
+  currentPage: string;
+};
+
+const docs = await getCollection("docs", ({ id }) => {
+  return !id.endsWith("index.md");
+});
+
+function parseMarkdown(doc: any) {
+  const markdownContent = doc.body;
+  const label = doc.data.label;
+  const slug = doc.slug;
+
+  // Split by line
+  let lines = markdownContent.split("\n");
+
+  let parsedContent = [];
+  let currentHeader = null;
+
+  for (let line of lines) {
+    // Check if line is a header
+    if (line.startsWith("#")) {
+      // Start new header
+      currentHeader = line.replace(/#/g, "").trim();
+    }
+
+    // Else, it's a paragraph. Add it to parsedContent with the currentHeader
+    else if (line.trim().length > 0) {
+      if (line.trim().startsWith("```")) {
+        continue;
+      }
+      // ignore empty lines
+      parsedContent.push({
+        label,
+        header: currentHeader,
+        paragraph: line.trim(),
+        slug,
+      });
+    }
+  }
+
+  return parsedContent;
+}
+
+const parsed_markdown = docs.map((doc) => {
+  return parseMarkdown(doc);
+});
+
+const LANG = "en";
+
+const metaData = await getCollection("docs", ({ id }) => {
+  return id.endsWith("index.md");
+});
+
+let folders = metaData.map((folder: any) => {
+  return {
+    id: folder.id.split("/").slice(0, -1).join("/"),
+    label: folder.data.label,
+    slug: `${LANG}/${folder.slug}`,
+    order: folder.data.order,
+  };
+});
+
+folders.sort((a, b) => a.order - b.order);
+
+const files = await getCollection("docs", ({ id }) => {
+  return !id.endsWith("index.md");
+});
+
+// console.log(docs);
+
+docs.forEach((doc: any) => {
+  console.log(doc.slug);
+});
+
+const { currentPage } = Astro.props;
+
+console.log("current page:", currentPage);
+
+// getid by looking up by slug
+
+let currentDocLabel = "";
+let currentDocFolder = null;
+
+if (currentPage !== "/") {
+  let currentDoc = docs.find(function (doc) {
+    // console.log("doc", doc.slug);
+    // console.log("currentPage", currentPage);
+    return `/${doc.slug}/` === currentPage || `/${doc.slug}` === currentPage;
+  });
+
+  // console.log(currentPage === `/${docs[0].slug}`);
+  // console.log("currentPage", currentPage);
+  // console.log("docs[0].slug", `/${docs[0].slug}`);
+
+  // // console.log("doc1", docs[0].slug);
+  // console.log("currentDoc", currentDoc);
+
+  if (currentDoc) {
+    // console.log("currentDocId", currentDoc.id);
+    currentDocLabel = currentDoc.data.label;
+  }
+
+  if (currentDoc) {
+    let currentDocId: any = currentDoc?.id;
+    let slashPosition = currentDocId?.lastIndexOf("/");
+    if (slashPosition !== -1) {
+      currentDocId = currentDocId.substring(0, slashPosition);
+    }
+
+    currentDocFolder = metaData.find(function (item) {
+      return item.id.startsWith(currentDocId);
+    });
+  }
+}
+---
+
+<header class="max-w-8xl mx-auto">
+  <div
+    class="py-4 border-b border-zinc-900/10 lg:px-8 lg:border-0 dark:border-slate-300/10 mx-4 lg:mx-0"
+  >
+    <nav
+      class="relative flex justify-between items-center"
+      title="Top Navigation"
+    >
+      <div class="flex gap-4 items-center">
+        <a
+          class="mr-3 flex flex-row gap-2 w-[2.0625rem] overflow-hidden md:w-auto text-xl items-center"
+          href="/"
+        >
+          <!-- <Icon class="w-7 h-7 cursor-pointer" name={"ph:planet-fill"} /> -->
+          <RocketLaunchIcon className="h-6 w-6" aria-hidden="true" />
+          <h1 class="hidden lg:block">{SITE.title ?? "Documentation"}</h1>
+        </a>
+        <div class="lg:flex gap-4 text-zinc-600 dark:text-zinc-400 font-semibold hidden">
+          <a class="hover:text-zinc-900 dark:hover:text-zinc-100" href="/"> Docs</a>
+          <a class="hover:text-zinc-900 dark:hover:text-zinc-100" href="/blog"> Blog</a>
+          <a class="hover:text-zinc-900 dark:hover:text-zinc-100" href="/references"> References</a>
+        </div>
+      </div>
+
+      <div class="flex flex-row gap-3 lg:gap-6">
+        <Search client:load searchList={parsed_markdown.flat()}>
+          <MagnifyingGlassIcon className="h-4 w-4" aria-hidden="true" />
+        </Search>
+        <ThemeMenu client:load />
+        <Lightning client:load />
+        <MobileMenu client:load />
+      </div>
+    </nav>
+  </div>
+  <div
+    class="flex gap-4 py-4 lg:px-8 lg:hidden ml-4 lg:mx-0"
+  >
+    <MobileSidebar client:load>
+      {
+        folders.map((folder: any) => (
+          <DocNavigation
+            currentPage={currentPage}
+            folder={folder}
+            files={files}
+          />
+        ))
+      }
+    </MobileSidebar>
+    <div class="flex items-center text leading-6 whitespace-nowrap min-w-0">
+      {
+        currentPage && (
+          <>
+            {currentDocFolder && (
+              <>
+                <span class="font-semibold text-zinc-600 dark:text-zinc-400 pr-2">
+                  {currentDocFolder?.data.label}
+                </span>
+                <ChevronRightIcon
+                  className="text-zinc-600 dark:text-zinc-400 h-4 w-4"
+                  aria-hidden="true"
+                />
+              </>
+            )}
+            <span class="font-semibold text-zinc-900 dark:text-zinc-200 truncate pl-2">
+              {currentDocLabel}
+            </span>
+          </>
+        )
+      }
+    </div>
+  </div>
+</header>
+
+<style>
+  .primary {
+    fill: #7c3aed;
+  }
+
+  .secondary {
+    fill: #fff;
+  }
+</style>

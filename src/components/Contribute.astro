@@ -1,0 +1,43 @@
+---
+import { Icon } from "astro-icon";
+const community = [
+  {
+    title: "Contributor Guide",
+    icon: "mdi:book-open",
+    link: "https://twitter.com/chrisatmachine",
+  },
+  {
+    title: "Edit this page",
+    icon: "mdi:lead-pencil",
+    link: "https://twitter.com/hasuraHQ",
+  },
+  {
+    title: "Report an issue",
+    icon: "mdi:alert-circle-outline",
+    link: "https://discord.gg/8KvA3JU",
+  },
+];
+---
+
+<div>
+  <h2 class="font-bold cursor-pointer mb-2 select-none leading-6">
+    Contribute
+  </h2>
+  <ul>
+    {
+      community.map((item) => (
+        <li class="flex gap-2 items-center">
+          <a
+            href={item.link}
+            class="pl-4 space-x-reverse transition border-l-4 dark:border-zinc-700 duration-200 ease-out pt-1 pb-1 leading-5 text-theme-text-lighter no-underline bidi-override text-base w-full inline-flex gap-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:underline"
+          >
+            <div class="flex gap-2 items-center">
+              <Icon class="w-4 h-4 cursor-pointer" name={item.icon} />
+              {item.title}
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>
