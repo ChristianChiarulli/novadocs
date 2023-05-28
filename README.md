@@ -15,14 +15,10 @@ All commands are run from the root of the project, from a terminal:
 
 ## TODO
 
-- nova color theme
 - 404 page
+- nova color theme
 - support files outside directories
 - write docs for novadocs
-
-Sovereign computing for a better tomorrow
-
-Revolutionizing safety for an uncertain future
 
 - code copy button
 - support drafts
