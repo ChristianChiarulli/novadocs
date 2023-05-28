@@ -1,14 +1,11 @@
 ---
 import type { MarkdownHeading } from "astro";
 import type { CollectionEntry } from "astro:content";
-import HeadCommon from "../components/HeadCommon.astro";
-// import HeadSEO from '../components/HeadSEO.astro';
-import Header from "../components/Header.astro";
 import LeftSidebar from "../components/LeftSidebar.astro";
 import RightSidebar from "../components/RightSidebar.astro";
 import Footer from "../components/Footer.astro";
-import { SITE } from "../settings";
 import Pagination from "../components/Pagination.astro";
+import MainLayout from "./MainLayout.astro";
 
 type Props = CollectionEntry<"docs">["data"] & {
   headings: MarkdownHeading[];
@@ -16,65 +13,38 @@ type Props = CollectionEntry<"docs">["data"] & {
   prev?: any;
 };
 
-const { headings, next, prev, ...data } = Astro.props;
-// const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const { headings, next, prev } = Astro.props;
 const currentPage = Astro.url.pathname;
 ---
 
-<html dir={"ltr"} lang={"en"} class="initial">
-  <head>
-    <HeadCommon />
-    <!-- <HeadSEO {...data} canonicalUrl={canonicalURL} /> -->
-    <title>
-      {`${data.label} | ${SITE.title}`}
-    </title>
-  </head>
-
-  <body
-    class="antialiased text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900"
-  >
-    <div class="flex flex-col">
-      <div
-        class="sticky top-0 w-full backdrop-blur flex-none transition-colors duration-500 z-40 border-b border-zinc-200 dark:border-zinc-700 bg-white/95 dark:bg-zinc-900/80"
+<MainLayout>
+  <div class="2xl:flex overflow-hidden">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
+      <aside
+        class="hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[16.5rem] pb-10 overflow-y-auto"
       >
-        <Header currentPage={currentPage} />
-      </div>
-      <div class="2xl:flex overflow-hidden">
-        <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
-          <aside
-            class="hidden lg:block fixed z-20 inset-0 top-[3.8125rem] left-[max(0px,calc(50%-45rem))] right-auto w-[19.5rem] pb-10 px-8 overflow-y-auto"
+        <LeftSidebar currentPage={currentPage} />
+      </aside>
+      <div class="lg:pl-[16rem]">
+        <div class="mx-auto max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
+          <div
+            class="flex flex-col items-center lg:border-l lg:border-zinc-200 lg:dark:border-zinc-700 lg:pl-[3.5rem]"
           >
-            <LeftSidebar currentPage={currentPage} />
-          </aside>
-          <div class="lg:pl-[16rem]">
-            <div class="mx-auto max-w-none xl:ml-0 xl:mr-[15.5rem] xl:pr-16">
-              <div
-                class="flex flex-col lg:border-l lg:border-zinc-200 lg:dark:border-zinc-700 lg:pl-[3.5rem]"
-              >
-                <article
-                  class="pt-10 max-w-3xl lg:min-w-[40rem] min-h-[20rem] prose prose-zinc prose-h2:pt-20 prose-h2:mt-[-5rem] xl:mb-0 dark:prose-dark dark:prose-invert lg:mb-48 mb-16"
-                >
-                  <slot />
-                </article>
-                <Pagination next={next} prev={prev} />
-                <Footer />
-              </div>
-              <aside
-                class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 overflow-y-auto hidden xl:block"
-              >
-                <RightSidebar headings={headings} />
-              </aside>
-            </div>
+            <article
+              class="pt-10 max-w-3xl lg:min-w-[40rem] min-h-[20rem] prose prose-zinc prose-h2:pt-20 prose-h2:mt-[-5rem] xl:mb-0 dark:prose-dark dark:prose-invert lg:mb-48 mb-16"
+            >
+              <slot />
+            </article>
+            <Pagination next={next} prev={prev} />
+            <Footer />
           </div>
+          <aside
+            class="fixed z-20 top-[3.8125rem] bottom-0 right-[max(0px,calc(50%-45rem))] w-[19.5rem] py-10 overflow-y-auto hidden xl:block"
+          >
+            <RightSidebar headings={headings} />
+          </aside>
         </div>
       </div>
     </div>
-    <style>
-      @media (prefers-reduced-motion: no-preference) {
-        :root {
-          scroll-behavior: smooth;
-        }
-      }
-    </style>
-  </body>
-</html>
+  </div>
+</MainLayout>
