@@ -29,7 +29,7 @@ export default function MobileSidebar({ children }: any) {
           aria-hidden="true"
         />
         <div className="fixed inset-0 flex h-screen">
-          <Dialog.Panel className="relative w-56 max-w-xs bg-white dark:bg-zinc-800">
+          <Dialog.Panel className="relative w-56 md:w-72 max-w-xs bg-white dark:bg-zinc-800">
             <button
               onClick={closePopup}
               className="absolute z-10 top-3 right-5 w-8 h-8 flex items-center justify-center text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-400"
