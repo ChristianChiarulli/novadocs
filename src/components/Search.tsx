@@ -37,6 +37,7 @@ export default function Search(props: any) {
 
   const closePopup = () => {
     setIsOpen(false);
+    setQuery("");
   };
 
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function Search(props: any) {
       if (event.key === "Escape") {
         event.preventDefault();
         event.stopPropagation();
+        setQuery("");
         closePopup();
       }
     };
@@ -90,6 +92,7 @@ export default function Search(props: any) {
       </div>
       <SearchPopup
         isOpen={isOpen}
+        closePopup={closePopup}
         setIsOpen={setIsOpen}
         query={query}
         setQuery={setQuery}

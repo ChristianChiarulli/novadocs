@@ -17,8 +17,6 @@ All commands are run from the root of the project, from a terminal:
 
 - nova color theme
 - 404 page
-- edit this page button needs context for current page
-- update links
 - support files outside directories
 - write docs for novadocs
 

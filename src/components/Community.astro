@@ -1,37 +1,6 @@
 ---
 import { Icon } from "astro-icon";
-const community = [
-  {
-    title: "GitHub",
-    icon: "mdi:github",
-    link: "https://github.com/ChristianChiarulli",
-  },
-  {
-    title: "Discord",
-    icon: "ic:baseline-discord",
-    link: "https://discord.gg/Xb9B4Ny",
-  },
-  {
-    title: "Twitter",
-    icon: "mdi:twitter",
-    link: "https://twitter.com/chrisatmachine",
-  },
-  {
-    title: "Nostr",
-    icon: "uil:message",
-    link: "https://blogstack.io/u/npub1ygzj9skr9val9yqxkf67yf9jshtyhvvl0x76jp5er09nsc0p3j6qr260k2",
-  },
-  {
-    title: "YouTube",
-    icon: "mdi:youtube",
-    link: "https://youtube.com/@chrisatmachine",
-  },
-  {
-    title: "Twitch",
-    icon: "mdi:twitch",
-    link: "https://twitch.tv/chrisatmachine",
-  },
-];
+import { COMMUNITY } from "../settings";
 ---
 
 <div>
@@ -39,7 +8,7 @@ const community = [
 
   <ul>
     {
-      community.map((item) => (
+      COMMUNITY.map((item) => (
         <li class="flex gap-2 items-center">
           <a
             target="_blank"

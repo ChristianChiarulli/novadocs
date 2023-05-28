@@ -1,24 +1,39 @@
 export const SITE = {
   title: "NovaDocs",
-  description: "Your website description.",
+  description: "A documentation template for Astro",
   defaultLanguage: "en-us",
 };
 
-export const CONTRIBUTE = [
+export const COMMUNITY = [
   {
-    title: "Contributor Guide",
-    icon: "mdi:book-open",
+    title: "GitHub",
+    icon: "mdi:github",
+    link: "https://github.com/ChristianChiarulli",
+  },
+  {
+    title: "Discord",
+    icon: "ic:baseline-discord",
+    link: "https://discord.gg/Xb9B4Ny",
+  },
+  {
+    title: "Twitter",
+    icon: "mdi:twitter",
     link: "https://twitter.com/chrisatmachine",
   },
   {
-    title: "Edit this page",
-    icon: "mdi:lead-pencil",
-    link: "https://github.com/ChristianChiarulli/novadocs/tree/master/src/content/docs",
+    title: "Nostr",
+    icon: "uil:message",
+    link: "https://blogstack.io/u/npub1ygzj9skr9val9yqxkf67yf9jshtyhvvl0x76jp5er09nsc0p3j6qr260k2",
   },
   {
-    title: "Report an issue",
-    icon: "mdi:alert-circle-outline",
-    link: "https://discord.gg/8KvA3JU",
+    title: "YouTube",
+    icon: "mdi:youtube",
+    link: "https://youtube.com/@chrisatmachine",
+  },
+  {
+    title: "Twitch",
+    icon: "mdi:twitch",
+    link: "https://twitch.tv/chrisatmachine",
   },
 ];
 
