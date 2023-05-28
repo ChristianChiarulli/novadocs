@@ -12,7 +12,7 @@ let folders = metaData.map((folder: any) => {
   return {
     id: folder.id.split("/").slice(0, -1).join("/"),
     label: folder.data.label,
-    slug: `${LANG}/${folder.slug}`,
+    slug: `${folder.slug}`,
     order: folder.data.order,
   };
 });

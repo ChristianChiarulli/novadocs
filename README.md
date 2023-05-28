@@ -15,7 +15,6 @@ All commands are run from the root of the project, from a terminal:
 
 ## TODO
 
-- 404 page
 - nova color theme
 - support files outside directories
 - write docs for novadocs
