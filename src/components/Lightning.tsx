@@ -176,7 +176,7 @@ export default function Lightning() {
                     name="message"
                     id="message"
                     placeholder="Optional"
-                    className="block w-full sm:py-3 shadow-sm sm:text-sm focus:ring-purple-300 focus:border-purple-300 border-gray-300 dark:border-zinc-600 dark:bg-zinc-800 dark:focus:ring-orange-400 dark:focus:border-orange-400 rounded-md"
+                    className="block w-full sm:py-3 shadow-sm sm:text-sm focus:ring-purple-300 focus:border-purple-300 border-zinc-300 dark:border-zinc-600 dark:bg-zinc-800 dark:focus:ring-orange-400 dark:focus:border-orange-400 rounded-md"
                   />
                 </div>
               </div>
