@@ -5,6 +5,7 @@ import type { Satoshis } from "lnurl-pay/dist/types/types";
 import { BoltIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useStore } from "@nanostores/react";
 import { connected } from "../store/lightning";
+import { LN_URL_OR_ADDRESS } from "../settings";
 
 const PRESET_AMOUNTS = [
   { value: 1000 as Satoshis, label: "1k" },
@@ -57,7 +58,7 @@ export default function Lightning() {
     // @ts-ignore
     if (typeof window.webln !== "undefined") {
       // TODO: put address in settings
-      const lnUrlOrAddress = "chrisatmachine@getalby.com";
+      const lnUrlOrAddress = LN_URL_OR_ADDRESS;
 
       const { invoice /* , params, successAction, validatePreimage  */ } =
         await requestInvoice({
@@ -165,7 +166,10 @@ export default function Lightning() {
               </div>
 
               <div className="mt-8">
-                <label htmlFor="message" className="block text-sm font-semibold">
+                <label
+                  htmlFor="message"
+                  className="block text-sm font-semibold"
+                >
                   Message
                 </label>
                 <div className="mt-3">

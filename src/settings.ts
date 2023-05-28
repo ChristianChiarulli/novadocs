@@ -44,3 +44,4 @@ export const GIT_REPO = {
   issueURL: "https://github.com/ChristianChiarulli/novadocs/issues",
 };
 
+export const LN_URL_OR_ADDRESS = "chrisatmachine@getalby.com";
