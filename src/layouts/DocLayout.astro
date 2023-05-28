@@ -13,11 +13,14 @@ type Props = CollectionEntry<"docs">["data"] & {
   prev?: any;
 };
 
-const { headings, next, prev } = Astro.props;
+const { headings, next, prev, ...data } = Astro.props;
 const currentPage = Astro.url.pathname;
+
+console.log("DATA", data.label)
+
 ---
 
-<MainLayout>
+<MainLayout label = {data.label}>
   <div class="2xl:flex overflow-hidden">
     <div class="max-w-8xl mx-auto px-4 sm:px-6 md:px-8">
       <aside
