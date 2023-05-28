@@ -81,7 +81,7 @@ export default function Lightning() {
   return (
     <>
       <button
-        className="hidden sm:block"
+        className="hidden sm:block outline-none focus:ring-0"
         onClick={$connected === "true" ? openTipModal : connectHandler}
       >
         <svg
