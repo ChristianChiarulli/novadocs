@@ -29,7 +29,6 @@ export default function ThemeToggle() {
   };
 
   useEffect(() => {
-    console.log("theme test", theme)
     if (
       localStorage.theme === "dark" ||
       (!("theme" in localStorage) &&

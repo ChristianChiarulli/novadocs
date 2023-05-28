@@ -83,15 +83,7 @@ const files = await getCollection("docs", ({ id }) => {
   return !id.endsWith("index.md");
 });
 
-// console.log(docs);
-
-docs.forEach((doc: any) => {
-  console.log(doc.slug);
-});
-
 const { currentPage } = Astro.props;
-
-console.log("current page:", currentPage);
 
 // getid by looking up by slug
 
@@ -100,20 +92,10 @@ let currentDocFolder = null;
 
 if (currentPage !== "/") {
   let currentDoc = docs.find(function (doc) {
-    // console.log("doc", doc.slug);
-    // console.log("currentPage", currentPage);
     return `/${doc.slug}/` === currentPage || `/${doc.slug}` === currentPage;
   });
 
-  // console.log(currentPage === `/${docs[0].slug}`);
-  // console.log("currentPage", currentPage);
-  // console.log("docs[0].slug", `/${docs[0].slug}`);
-
-  // // console.log("doc1", docs[0].slug);
-  // console.log("currentDoc", currentDoc);
-
   if (currentDoc) {
-    // console.log("currentDocId", currentDoc.id);
     currentDocLabel = currentDoc.data.label;
   }
 

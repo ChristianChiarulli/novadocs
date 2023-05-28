@@ -7,8 +7,6 @@ export async function getStaticPaths() {
   const docs = await getCollection("docs", ({ id }) => {
     return !id.endsWith("index.md");
   });
-  // console.log(docs);
-  // console.log(docs.map((entry) => entry.body));
   return docs.map((entry) => ({
     params: {
       slug: entry.slug,

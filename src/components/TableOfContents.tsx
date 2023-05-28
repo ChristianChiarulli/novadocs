@@ -19,7 +19,6 @@ const TableOfContents = ({ toc = [], labels }: Props) => {
   useEffect(() => {
     const setCurrent: IntersectionObserverCallback = (entries) => {
       for (const entry of entries) {
-        // console.log("entry", entry)
         if (entry.isIntersecting) {
           const { id } = entry.target;
           if (id === onThisPageID) continue;

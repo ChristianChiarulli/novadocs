@@ -38,7 +38,6 @@ export default function Lightning() {
         connected.set("true");
       }
     } catch (e) {
-      console.log("disconnected", e);
       connected.set("false");
     }
   };
@@ -69,7 +68,6 @@ export default function Lightning() {
       try {
         // @ts-ignore
         const result = await webln.sendPayment(invoice);
-        // console.log("Tip Result:", result);
         setTippedAmount(tipInputValue);
         setPaymentHash(result.paymentHash);
       } catch (e) {

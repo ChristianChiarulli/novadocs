@@ -19,7 +19,6 @@ export default function Search(props: any) {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    // console.log("searchList", props.searchList);
   }, []);
 
   useEffect(() => {
@@ -28,7 +27,6 @@ export default function Search(props: any) {
       // .map((result) => result.item)
       .slice(0, 30);
     setPosts(posts);
-    // console.log("posts", posts);
   }, [query]);
 
   const openPopup = () => {

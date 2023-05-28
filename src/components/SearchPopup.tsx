@@ -63,7 +63,6 @@ export default function SearchPopup({
   useEffect(() => {
     const transformed = transformContent(posts);
     setTransformedContent(transformed);
-    // console.log(transformedContent);
   }, [posts]);
 
   function cleanHeaderLink(header: string) {
