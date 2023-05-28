@@ -34,7 +34,7 @@ const TableOfContents = ({ toc = [], labels }: Props) => {
     const observerOptions: IntersectionObserverInit = {
       // Negative top margin accounts for `scroll-margin`.
       // Negative bottom margin means heading needs to be towards top of viewport to trigger intersection.
-      rootMargin: "30px 10% -66%",
+      rootMargin: "10px 0% -66%",
       threshold: 1,
     };
 
