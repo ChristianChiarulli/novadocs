@@ -70,14 +70,14 @@ const TableOfContents = ({ toc = [], labels }: Props) => {
 
     if (currentHeading.slug === slug) {
       currentHeaderLink =
-        "bg-purple-100 dark:bg-orange-500/25 border-l-4 border-purple-500 dark:border-orange-600 dark:text-zinc-100 rounded-r-md";
+        "bg-purple-100 dark:bg-orange-500/25 border-l-2 border-purple-500 dark:border-orange-600 dark:text-zinc-100 rounded-r-md";
       textBase = "";
     }
 
     return (
       <li className="">
         <a
-          className={`transition border-l-4 duration-200 ease-out pt-1 pb-1 leading-5 text-theme-text-lighter no-underline bidi-override text-base pr-2 rounded-r-md w-full inline-flex gap-2 hover:text-zinc-900 dark:hover:text-zinc-100 hover:underline ${headerDepth} ${textBase} ${currentHeaderLink}`.trim()}
+          className={`transition border-l-2 duration-200 ease-out pt-1 pb-1 leading-5 text-theme-text-lighter no-underline bidi-override text-base pr-2 rounded-r-md w-full inline-flex gap-2 hover:text-zinc-900 dark:hover:text-zinc-100 hover:underline ${headerDepth} ${textBase} ${currentHeaderLink}`.trim()}
           href={`#${slug}`}
         >
           {unescape(text)}
